@@ -43,16 +43,15 @@
         "asset-pack": "core",
         "parent": 1,
         "children": [
-            "3641c67b-d14f-42d6-994e-38cad1e22b12"
+            "3641c67b-d14f-42d6-994e-38cad1e22b12",
+            "38764d97-9e39-4bf2-a873-34df84d63c0e"
         ]
     },
     "3641c67b-d14f-42d6-994e-38cad1e22b12": {
         "id": "3641c67b-d14f-42d6-994e-38cad1e22b12",
-        "class": "Parallel",
+        "class": "Sequence",
         "name": "",
-        "options": {
-            "succeedOnOne": false
-        },
+        "options": {},
         "asset-pack": "core",
         "parent": "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
         "children": [
@@ -99,12 +98,161 @@
     },
     "e4c3a1b7-ca52-43a7-be7c-50acad7099f4": {
         "id": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+        "class": "Sequence",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": 1,
+        "children": [
+            "0c9b15a2-acfd-440b-be62-74651f040c62",
+            "114e7e21-2873-4574-9a0e-5ef2a67ccbdf",
+            "354d4bfb-78af-40c7-a26b-b56a9cec9b87",
+            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99"
+        ]
+    },
+    "38764d97-9e39-4bf2-a873-34df84d63c0e": {
+        "id": "38764d97-9e39-4bf2-a873-34df84d63c0e",
+        "class": "Listen",
+        "name": "",
+        "options": {
+            "getOptions": [
+                "() => {",
+                "    let options = {",
+                "        heyJibo: true,",
+                "        detectEnd: true,",
+                "        incremental: false,",
+                "    }",
+                "    return options;",
+                "}"
+            ],
+            "rule": "reservations.rule",
+            "onResult": [
+                "(listener) => {",
+                "    listener.on('hey-jibo', (asrResult, speakerIds) => {",
+                "        emitter.emit('listen')",
+                "    });",
+                "    listener.on('cloud', (asrResult, speakerIds) => {",
+                "        console.log(asrResult);",
+                "        notepad.results = asrResult.NLParse",
+                "    });",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "c4ba0aaa-b165-47f0-adc6-34640b6afe64"
+    },
+    "0c9b15a2-acfd-440b-be62-74651f040c62": {
+        "id": "0c9b15a2-acfd-440b-be62-74651f040c62",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Say cheese!",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
+    },
+    "114e7e21-2873-4574-9a0e-5ef2a67ccbdf": {
+        "id": "114e7e21-2873-4574-9a0e-5ef2a67ccbdf",
+        "class": "LookAt",
+        "name": "",
+        "options": {
+            "getTarget": [
+                "() => {",
+                "  let jibo = require('jibo');",
+                "  let entity = jibo.lps.getClosestVisualEntity();",
+                "  ",
+                "  let position = {x:.5, y:.1, z:.4};",
+                "",
+                "  if (entity) {",
+                "          position = {x: entity.position.x, y: entity.position.y, z: entity.position.z};",
+                "  }",
+                "",
+                "  return position;",
+                "}"
+            ],
+            "isContinuous": false,
+            "config": [
+                "(lookAt) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+        "decorators": [
+            "cc983284-683d-4e5f-b20d-c0f5baa4351a"
+        ]
+    },
+    "cc983284-683d-4e5f-b20d-c0f5baa4351a": {
+        "id": "cc983284-683d-4e5f-b20d-c0f5baa4351a",
+        "class": "TimeoutSucceed",
+        "name": "",
+        "options": {
+            "timeout": 8000
+        },
+        "asset-pack": "core"
+    },
+    "354d4bfb-78af-40c7-a26b-b56a9cec9b87": {
+        "id": "354d4bfb-78af-40c7-a26b-b56a9cec9b87",
         "class": "Parallel",
         "name": "",
         "options": {
             "succeedOnOne": false
         },
         "asset-pack": "core",
-        "parent": 1
+        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+        "children": [
+            "d9c0a925-ddf8-4635-b44f-ea0b26707e4c",
+            "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5"
+        ]
+    },
+    "d9c0a925-ddf8-4635-b44f-ea0b26707e4c": {
+        "id": "d9c0a925-ddf8-4635-b44f-ea0b26707e4c",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "camera.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "354d4bfb-78af-40c7-a26b-b56a9cec9b87"
+    },
+    "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5": {
+        "id": "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5",
+        "class": "TakePhoto",
+        "name": "",
+        "options": {
+            "resolution": 2,
+            "onPhoto": [
+                "(error, imageUrl) => {",
+                "  ",
+                "// put the photo's URL on the notepad",
+                "notepad.imageUrl = imageUrl;",
+                "",
+                "}"
+            ],
+            "noDistortion": true
+        },
+        "asset-pack": "core",
+        "parent": "354d4bfb-78af-40c7-a26b-b56a9cec9b87"
+    },
+    "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99": {
+        "id": "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
+        "class": "ExecuteScript",
+        "name": "",
+        "options": {
+            "exec": [
+                "() => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
     }
 }
