@@ -6,16 +6,62 @@
         "options": {},
         "asset-pack": "core",
         "children": [
-            "72a72fb0-ed2e-4be7-882f-a9ea0a20bd39",
-            "485e9f39-2edc-4f5e-bdde-408456aed3a6"
+            "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
+            "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
         ],
-        "decorators": []
+        "decorators": [
+            "ef5452e0-0f94-47f5-8d39-b2d396885818"
+        ]
     },
     "meta": {
         "version": 1
     },
-    "72a72fb0-ed2e-4be7-882f-a9ea0a20bd39": {
-        "id": "72a72fb0-ed2e-4be7-882f-a9ea0a20bd39",
+    "ef5452e0-0f94-47f5-8d39-b2d396885818": {
+        "id": "ef5452e0-0f94-47f5-8d39-b2d396885818",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return true;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "c4ba0aaa-b165-47f0-adc6-34640b6afe64": {
+        "id": "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": 1,
+        "children": [
+            "3641c67b-d14f-42d6-994e-38cad1e22b12"
+        ]
+    },
+    "3641c67b-d14f-42d6-994e-38cad1e22b12": {
+        "id": "3641c67b-d14f-42d6-994e-38cad1e22b12",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
+        "children": [
+            "c333c70d-cfa0-463c-8cce-56050019a63e",
+            "5653deb2-4489-4d83-adb0-9c3c8518a47a"
+        ]
+    },
+    "c333c70d-cfa0-463c-8cce-56050019a63e": {
+        "id": "c333c70d-cfa0-463c-8cce-56050019a63e",
         "class": "Subtree",
         "name": "",
         "options": {
@@ -31,37 +77,32 @@
             ]
         },
         "asset-pack": "core",
-        "parent": 1,
-        "decorators": [
-            "d8c57751-6341-4fdc-a438-dec189056ba1"
-        ]
+        "parent": "3641c67b-d14f-42d6-994e-38cad1e22b12"
     },
-    "d8c57751-6341-4fdc-a438-dec189056ba1": {
-        "id": "d8c57751-6341-4fdc-a438-dec189056ba1",
-        "class": "SucceedOnEmbedded",
+    "5653deb2-4489-4d83-adb0-9c3c8518a47a": {
+        "id": "5653deb2-4489-4d83-adb0-9c3c8518a47a",
+        "class": "ExecuteScriptAsync",
         "name": "",
         "options": {
-            "rule": "hey_jibo",
-            "onResult": [
-                "(listener) => {",
-                "\tlistener.on('hey-jibo', function(asrResult, speakerIds) {",
-                "",
-                "\t});",
+            "exec": [
+                "(succeed, fail) => {",
+                "    let dofs = jibo.animate.dofs;",
+                "    jibo.animate.centerRobot(dofs.ALL, true, () => {",
+                "        jibo.animate.setLEDColor([0, 0, 1]);",
+                "        succeed();    ",
+                "    });",
                 "}"
             ]
         },
-        "asset-pack": "core"
+        "asset-pack": "core",
+        "parent": "3641c67b-d14f-42d6-994e-38cad1e22b12"
     },
-    "485e9f39-2edc-4f5e-bdde-408456aed3a6": {
-        "id": "485e9f39-2edc-4f5e-bdde-408456aed3a6",
-        "class": "PlayAnimation",
+    "e4c3a1b7-ca52-43a7-be7c-50acad7099f4": {
+        "id": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+        "class": "Parallel",
         "name": "",
         "options": {
-            "animPath": "greeting.keys",
-            "config": [
-                "(animation) => {",
-                "}"
-            ]
+            "succeedOnOne": false
         },
         "asset-pack": "core",
         "parent": 1
