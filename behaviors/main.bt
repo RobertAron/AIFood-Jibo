@@ -266,14 +266,17 @@
                 "() => {",
                 "  var request = require('request');",
                 "  var url = ''; //NHAT URL ",
-                "  request(url, function (error, response, body) {",
-                "    if (!error && response.statusCode == 200) {",
-                "      // success response",
-                "      notepad.rspresponse = true;",
-                "      // do game logic",
-                "      notepad.jibowin = false;",
-                "    }",
-                "  })",
+                "  ",
+                "  notepad.jibowin = true;",
+                "  notepad.rspresponse = true;",
+                "  // request(url, function (error, response, body) {",
+                "  //   if (!error && response.statusCode == 200) {",
+                "  //     // success response",
+                "  //     notepad.rspresponse = true;",
+                "  //     // do game logic",
+                "  //     notepad.jibowin = false;",
+                "  //   }",
+                "  // })",
                 "}"
             ]
         },
@@ -311,7 +314,8 @@
             "d4704944-cb4a-4cfa-815a-be0f210a2b71",
             "a57cd1a4-e2ee-43d6-893e-65c6aa447140",
             "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5",
-            "fbbd8706-f601-4507-a801-d710de760e7f"
+            "fbbd8706-f601-4507-a801-d710de760e7f",
+            "96d32b4a-b750-4042-a6ae-7840f4cd9077"
         ]
     },
     "b884c16a-d65f-4f8c-942d-b1dd00b16a11": {
@@ -465,6 +469,7 @@
             ],
             "conditional": [
                 "() => {",
+                "    return false;",
                 "    return !notepad.rpsresponse;",
                 "}"
             ]
@@ -509,15 +514,89 @@
         "options": {
             "init": [
                 "() => {",
+                "  ",
                 "  notepad.rspresponse = false;",
                 "}"
             ],
             "conditional": [
                 "() => {",
+                "  return false;",
                 "    return !notepad.rspresponse",
                 "}"
             ]
         },
         "asset-pack": "core"
+    },
+    "96d32b4a-b750-4042-a6ae-7840f4cd9077": {
+        "id": "96d32b4a-b750-4042-a6ae-7840f4cd9077",
+        "class": "Switch",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
+        "children": [
+            "e058041a-037a-4abc-80da-cd61d89e9940",
+            "109186e6-6528-4d4b-bb91-a46214c6031d"
+        ]
+    },
+    "e058041a-037a-4abc-80da-cd61d89e9940": {
+        "id": "e058041a-037a-4abc-80da-cd61d89e9940",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "victoryDance.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "96d32b4a-b750-4042-a6ae-7840f4cd9077",
+        "decorators": [
+            "0be202d0-9616-430a-87da-8b5be37df399"
+        ]
+    },
+    "0be202d0-9616-430a-87da-8b5be37df399": {
+        "id": "0be202d0-9616-430a-87da-8b5be37df399",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  return notepad.jibowin;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "70cea2aa-f586-4ce1-a360-a167ee57344b": {
+        "id": "70cea2aa-f586-4ce1-a360-a167ee57344b",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  return !notepad.jibowin;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "109186e6-6528-4d4b-bb91-a46214c6031d": {
+        "id": "109186e6-6528-4d4b-bb91-a46214c6031d",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "defeatAnimation.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "96d32b4a-b750-4042-a6ae-7840f4cd9077",
+        "decorators": [
+            "70cea2aa-f586-4ce1-a360-a167ee57344b"
+        ]
     }
 }
