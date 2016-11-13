@@ -1,0 +1,5 @@
+TopRule = (I pick $number{myNum=number.num}
+);
+
+
+number @= ($w){num = _parsed};
