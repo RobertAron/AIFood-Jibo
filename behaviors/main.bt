@@ -612,6 +612,9 @@
         "asset-pack": "core",
         "parent": 1,
         "children": [
+            "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8",
+            "09520f5e-ab5d-4847-b0b7-3532717c47e4",
+            "5d1669fa-3248-432c-a9dc-3babef40e259",
             "5254af07-ced1-4eed-85d7-1dd047b896ac",
             "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
         ]
@@ -675,12 +678,172 @@
         "options": {
             "conditional": [
                 "() => {",
-                "  console.log('data here')",
+                "  console.log('data here in random')",
                 "  console.log(notepad.results)",
                 "  return notepad.results.status==='NO-PARSE'",
                 "}"
             ]
         },
         "asset-pack": "core"
+    },
+    "5d1669fa-3248-432c-a9dc-3babef40e259": {
+        "id": "5d1669fa-3248-432c-a9dc-3babef40e259",
+        "class": "Sequence",
+        "name": "introduction",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
+        "decorators": [
+            "7ddbee8f-93e7-44c7-9f66-76459d61b2a0"
+        ],
+        "children": [
+            "1559fee5-e6ec-42f1-a369-d931a16f6200"
+        ]
+    },
+    "7ddbee8f-93e7-44c7-9f66-76459d61b2a0": {
+        "id": "7ddbee8f-93e7-44c7-9f66-76459d61b2a0",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('data here in intro')",
+                "  console.log(notepad.results)",
+                "  return notepad.results.game==='intro'",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "1559fee5-e6ec-42f1-a369-d931a16f6200": {
+        "id": "1559fee5-e6ec-42f1-a369-d931a16f6200",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Hello world!\nOur team consists of Robert, Kevin, Su-jan, and Gnat\nand we are team Mobi from university of texas at arlington",
+            "onWord": [
+                "(word) => {",
+                "  ",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "5d1669fa-3248-432c-a9dc-3babef40e259"
+    },
+    "09520f5e-ab5d-4847-b0b7-3532717c47e4": {
+        "id": "09520f5e-ab5d-4847-b0b7-3532717c47e4",
+        "class": "Sequence",
+        "name": "bye",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
+        "decorators": [
+            "2ec02e10-526c-49c3-a2eb-6d451d50e075"
+        ],
+        "children": [
+            "4197a177-e93d-4021-8a0b-d0c2d9ccc5fc",
+            "0e1c2b82-b7e5-437d-9912-3bc8b407bc7a"
+        ]
+    },
+    "2ec02e10-526c-49c3-a2eb-6d451d50e075": {
+        "id": "2ec02e10-526c-49c3-a2eb-6d451d50e075",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('data here in bye')",
+                "  console.log(notepad.results)",
+                "  return notepad.results.game==='bye'",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "4197a177-e93d-4021-8a0b-d0c2d9ccc5fc": {
+        "id": "4197a177-e93d-4021-8a0b-d0c2d9ccc5fc",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Goodbye! \nI hope you liked our presentation",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "09520f5e-ab5d-4847-b0b7-3532717c47e4"
+    },
+    "0e1c2b82-b7e5-437d-9912-3bc8b407bc7a": {
+        "id": "0e1c2b82-b7e5-437d-9912-3bc8b407bc7a",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "heart.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "09520f5e-ab5d-4847-b0b7-3532717c47e4"
+    },
+    "d9853093-f676-43fc-bb46-d284f9cbb631": {
+        "id": "d9853093-f676-43fc-bb46-d284f9cbb631",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('data here in bye')",
+                "  console.log(notepad.results)",
+                "  return notepad.results.game==='hi'",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8": {
+        "id": "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8",
+        "class": "Sequence",
+        "name": "hi",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
+        "decorators": [
+            "d9853093-f676-43fc-bb46-d284f9cbb631"
+        ],
+        "children": [
+            "d4c52b0c-e294-44fb-a0b8-3c0a18f4611c",
+            "5336927d-6564-4adb-8080-3cf0acbcb24c"
+        ]
+    },
+    "5336927d-6564-4adb-8080-3cf0acbcb24c": {
+        "id": "5336927d-6564-4adb-8080-3cf0acbcb24c",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "heart.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8"
+    },
+    "d4c52b0c-e294-44fb-a0b8-3c0a18f4611c": {
+        "id": "d4c52b0c-e294-44fb-a0b8-3c0a18f4611c",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Hi! I'm jiiiiiiiiiiiiiibo",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8"
     }
 }

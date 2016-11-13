@@ -1,7 +1,11 @@
 TopRule =  $*(
-    $rps{game='rock'}|$tq{game='twenty'}
+    $rps{game='rock'}|$tq{game='twenty'}|$waw{game='intro'}|$bye{game='bye'}|$hi{game='hi'}
+
 );
 
 
 rps=let\'s play rock paper scissors;
 tq= lets play twenty questions;
+waw= who are we;
+bye=say bye;
+hi=say hi;
