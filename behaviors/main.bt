@@ -7,8 +7,7 @@
         "asset-pack": "core",
         "children": [
             "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
-            "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
-            "4752f23f-9d64-447c-a1e1-2e980ada314d"
+            "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b"
         ],
         "decorators": [
             "ef5452e0-0f94-47f5-8d39-b2d396885818"
@@ -108,7 +107,7 @@
         "name": "rock paper scissors",
         "options": {},
         "asset-pack": "core",
-        "parent": 1,
+        "parent": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
         "children": [
             "114e7e21-2873-4574-9a0e-5ef2a67ccbdf",
             "0c9b15a2-acfd-440b-be62-74651f040c62",
@@ -611,9 +610,12 @@
         "options": {
             "conditional": [
                 "() => {",
+                "  console.log('inside rps');",
                 "  if(notepad.results === 'GOT-PARSE'){",
-                "    return notepad.results.game === 'rock' ? true: false;",
+                "    console.log('true');",
+                "    return notepad.results.game === 'rock';",
                 "  }else{",
+                "    console.log('false');",
                 "    return false;",
                 "  }",
                 "}"
@@ -624,26 +626,485 @@
     "4752f23f-9d64-447c-a1e1-2e980ada314d": {
         "id": "4752f23f-9d64-447c-a1e1-2e980ada314d",
         "class": "Sequence",
-        "name": "high low game",
+        "name": "",
         "options": {},
         "asset-pack": "core",
-        "parent": 1,
+        "parent": "798c52c5-6c6f-4945-b5ce-ef273d5492c9",
         "decorators": [
-            "507e44e1-c33f-48c8-8704-6a306e755f03"
+            "14e0a67e-9bad-4085-a79f-941cc1de8066"
+        ],
+        "children": [
+            "5371923e-1440-4d74-8e08-0c355f2f6e05",
+            "5e513def-fbd4-4af0-9ba6-bbe9f98a2079"
         ]
     },
-    "507e44e1-c33f-48c8-8704-6a306e755f03": {
-        "id": "507e44e1-c33f-48c8-8704-6a306e755f03",
+    "61bc7b63-0622-4275-a0ab-fc76afad85e8": {
+        "id": "61bc7b63-0622-4275-a0ab-fc76afad85e8",
+        "class": "ExecuteScript",
+        "name": "have jibo pick number",
+        "options": {
+            "exec": [
+                "() => {",
+                "  console.log('made it');",
+                "  notepad.jiboNumber = Math.floor((Math.random() * 100) + 1);",
+                "  notepad.turns = 0;",
+                "  notepad.jiboWin = false;",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "798c52c5-6c6f-4945-b5ce-ef273d5492c9"
+    },
+    "89460c98-1f90-4335-bc3c-c3cb856ce1f0": {
+        "id": "89460c98-1f90-4335-bc3c-c3cb856ce1f0",
+        "class": "TextToSpeech",
+        "name": "",
+        "options": {
+            "words": "Let's play high low!\nTry to guess my number between one and one hundred!",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "798c52c5-6c6f-4945-b5ce-ef273d5492c9"
+    },
+    "133c5563-57bd-483f-8cd6-ecfc511919a5": {
+        "id": "133c5563-57bd-483f-8cd6-ecfc511919a5",
+        "class": "Listen",
+        "name": "",
+        "options": {
+            "getOptions": [
+                "() => {",
+                "    let options = {",
+                "        heyJibo: false,",
+                "        detectEnd: false,",
+                "        incremental: false,",
+                "        authenticateSpeaker: ''",
+                "    }",
+                "    return options;",
+                "}"
+            ],
+            "rule": "picknumber.rule",
+            "onResult": [
+                "(listener) => {",
+                "    listener.on('cloud', function(asrResult, speakerIds) {",
+                "      console.log('heard');",
+                "      console.log(asrResult);",
+                "      notepad.userInput = asrResult.Input",
+                "    });",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "5371923e-1440-4d74-8e08-0c355f2f6e05"
+    },
+    "3b2aeb58-9574-49b8-9081-f1798294e29b": {
+        "id": "3b2aeb58-9574-49b8-9081-f1798294e29b",
+        "class": "ExecuteScript",
+        "name": "game logic",
+        "options": {
+            "exec": [
+                "() => {",
+                "  //grab user number",
+                "  var userNumber = notepad.userInput;",
+                "  var jiboNumber = notepad.jiboNumber;",
+                "  ",
+                "  var string_to_number = require('string-to-number');",
+                "  var s2n = new string_to_number();",
+                "  ",
+                "  console.log('inputs');",
+                "  console.log(userNumber);",
+                "  console.log(jiboNumber);",
+                "  console.log('end input');",
+                "  //attempt to do conversion of user input",
+                "  console.log(\"attempted conversion\");",
+                "  console.log(s2n.convert(userNumber));",
+                "  ",
+                "  userNumber = s2n.convert(userNumber);",
+                "  ",
+                "  if(userNumber > jiboNumber){",
+                "    //set notepad to run lower ani  ",
+                "    notepad.inputRelation = 'higher';",
+                "  }",
+                "  else if(userNumber < jiboNumber){",
+                "    //set notepad to run higher ani",
+                "    notepad.inputRelation = 'lower';",
+                "  }",
+                "  else{",
+                "    // game over",
+                "    //user has guessed number, jibo lose",
+                "    notepad.gameOver = true;",
+                "    notepad.jiboWin = false;",
+                "    console.log(\"winner\");",
+                "  }",
+                "  notepad.turns += 1;",
+                "  console.log('turns');",
+                "  console.log(notepad.turns);",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "5371923e-1440-4d74-8e08-0c355f2f6e05"
+    },
+    "5371923e-1440-4d74-8e08-0c355f2f6e05": {
+        "id": "5371923e-1440-4d74-8e08-0c355f2f6e05",
+        "class": "Sequence",
+        "name": "listen for user number",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "4752f23f-9d64-447c-a1e1-2e980ada314d",
+        "children": [
+            "133c5563-57bd-483f-8cd6-ecfc511919a5",
+            "3b2aeb58-9574-49b8-9081-f1798294e29b"
+        ]
+    },
+    "5e513def-fbd4-4af0-9ba6-bbe9f98a2079": {
+        "id": "5e513def-fbd4-4af0-9ba6-bbe9f98a2079",
+        "class": "Switch",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "4752f23f-9d64-447c-a1e1-2e980ada314d",
+        "children": [
+            "ebcb1433-dcc0-4941-a61e-bdd07c1f05fb",
+            "f0dbf354-59d3-4271-bca3-27ef79cdf2ff",
+            "314f8a66-caab-4c05-8407-2f77c7a52b67",
+            "2f7a4960-35fa-423d-8b27-b76e71eb92ec"
+        ]
+    },
+    "ebcb1433-dcc0-4941-a61e-bdd07c1f05fb": {
+        "id": "ebcb1433-dcc0-4941-a61e-bdd07c1f05fb",
+        "class": "Sequence",
+        "name": "if turns > 5 game over",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "5e513def-fbd4-4af0-9ba6-bbe9f98a2079",
+        "children": [
+            "0eb9fff0-9e17-4d88-bbfe-902b266707ab"
+        ],
+        "decorators": [
+            "f2f5bf99-3d64-4b77-8160-97d664fea31c"
+        ]
+    },
+    "f2f5bf99-3d64-4b77-8160-97d664fea31c": {
+        "id": "f2f5bf99-3d64-4b77-8160-97d664fea31c",
         "class": "Case",
         "name": "",
         "options": {
             "conditional": [
                 "() => {",
-                "  if(notepad.results === 'GOT-PARSE'){",
-                "    return notepad.results.game === 'high-low' ? true: false;",
+                "  if(notepad.turns > 5){",
+                "    notepad.gameOver = true;",
+                "    notepad.jiboWin = true;",
+                "    console.log('jibo win?');",
+                "    console.log(notepad.jiboWin);",
+                "    console.log(notepad.turns);",
+                "    return true;",
+                "  }",
+                "  return false",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "5bdd2806-a1e5-4207-b773-8e253158e281": {
+        "id": "5bdd2806-a1e5-4207-b773-8e253158e281",
+        "class": "PlayAnimation",
+        "name": "player wins",
+        "options": {
+            "animPath": "defeatAnimation.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "f0dbf354-59d3-4271-bca3-27ef79cdf2ff",
+        "decorators": [
+            "3f138a39-2736-44d6-9883-f174dc44a797"
+        ]
+    },
+    "3f138a39-2736-44d6-9883-f174dc44a797": {
+        "id": "3f138a39-2736-44d6-9883-f174dc44a797",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log(\"inside jibo win animation controller\");",
+                "  console.log('jibo should be winning here');",
+                "  console.log(notepad.jiboWin);",
+                "  console.log(!notepad.jiboWin);",
+                "  console.log('above line should be false');",
+                "  if(notepad.jiboWin){",
+                "    return true;",
+                "  }",
+                "  return false;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "0eb9fff0-9e17-4d88-bbfe-902b266707ab": {
+        "id": "0eb9fff0-9e17-4d88-bbfe-902b266707ab",
+        "class": "PlayAnimation",
+        "name": "jibo wins",
+        "options": {
+            "animPath": "victoryDance.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "ebcb1433-dcc0-4941-a61e-bdd07c1f05fb",
+        "decorators": [
+            "d8a43585-1265-4e0b-8f9d-8e3ce1c3f4ba"
+        ]
+    },
+    "d8a43585-1265-4e0b-8f9d-8e3ce1c3f4ba": {
+        "id": "d8a43585-1265-4e0b-8f9d-8e3ce1c3f4ba",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('inside defeat animation controller');",
+                "  console.log(notepad.jiboWin);",
+                "  console.log('checking notepad jibwin == true');",
+                "  console.log(notepad.jiboWin == true);",
+                "  if(notepad.jiboWin== true){",
+                "    return true;",
+                "  }",
+                "  return true;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b": {
+        "id": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
+        "class": "Sequence",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": 1,
+        "children": [
+            "798c52c5-6c6f-4945-b5ce-ef273d5492c9",
+            "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
+        ]
+    },
+    "314f8a66-caab-4c05-8407-2f77c7a52b67": {
+        "id": "314f8a66-caab-4c05-8407-2f77c7a52b67",
+        "class": "Sequence",
+        "name": "else, tell user to go up or down",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "5e513def-fbd4-4af0-9ba6-bbe9f98a2079",
+        "decorators": [
+            "07e88798-6e0c-4163-be07-5989d6ffa3e1"
+        ],
+        "children": [
+            "f8200e01-94a3-425e-afdf-468d451d67ee"
+        ]
+    },
+    "07e88798-6e0c-4163-be07-5989d6ffa3e1": {
+        "id": "07e88798-6e0c-4163-be07-5989d6ffa3e1",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('inside last switch');",
+                "  console.log(notepad.turns);",
+                "  console.log(notepad.inputRelation);",
+                "  return notepad.turns < 5? true: false;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "92834307-c0c5-4784-9e40-0ca376aea362": {
+        "id": "92834307-c0c5-4784-9e40-0ca376aea362",
+        "class": "TextToSpeech",
+        "name": "guess lower",
+        "options": {
+            "words": "Guess lower!",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "2f7a4960-35fa-423d-8b27-b76e71eb92ec",
+        "decorators": [
+            "776239f9-1f6e-4947-b843-ae7dd383e993"
+        ]
+    },
+    "776239f9-1f6e-4947-b843-ae7dd383e993": {
+        "id": "776239f9-1f6e-4947-b843-ae7dd383e993",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('inside higher on last switch');",
+                "  console.log(notepad.inputRelation);",
+                "  return notepad.inputRelation ==='higher'?true:false;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "f8200e01-94a3-425e-afdf-468d451d67ee": {
+        "id": "f8200e01-94a3-425e-afdf-468d451d67ee",
+        "class": "TextToSpeech",
+        "name": "guess higher",
+        "options": {
+            "words": "Guess higher!",
+            "onWord": [
+                "(word) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "314f8a66-caab-4c05-8407-2f77c7a52b67",
+        "decorators": [
+            "120e4cb6-ebdd-485e-8284-2c98a4e859df"
+        ]
+    },
+    "120e4cb6-ebdd-485e-8284-2c98a4e859df": {
+        "id": "120e4cb6-ebdd-485e-8284-2c98a4e859df",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  return notepad.inputRelation ==='lower'?true:false;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "798c52c5-6c6f-4945-b5ce-ef273d5492c9": {
+        "id": "798c52c5-6c6f-4945-b5ce-ef273d5492c9",
+        "class": "Sequence",
+        "name": "high low game",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "7fd48fbd-119a-4eea-8e9c-9ab85fecf39b",
+        "decorators": [
+            "b1fef300-5366-46f4-8fde-acdea88bf873"
+        ],
+        "children": [
+            "89460c98-1f90-4335-bc3c-c3cb856ce1f0",
+            "61bc7b63-0622-4275-a0ab-fc76afad85e8",
+            "4752f23f-9d64-447c-a1e1-2e980ada314d"
+        ]
+    },
+    "b1fef300-5366-46f4-8fde-acdea88bf873": {
+        "id": "b1fef300-5366-46f4-8fde-acdea88bf873",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  console.log('inside case'); ",
+                "  console.log(notepad.results);",
+                "  if(notepad.results.status === 'GOT-PARSE'){",
+                "    console.log('inside the if statement under high low game');",
+                "    console.log(notepad.results.game=== 'twenty');",
+                "    return notepad.results.game === 'twenty';",
                 "  }else{",
                 "    return false;",
                 "  }",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "14e0a67e-9bad-4085-a79f-941cc1de8066": {
+        "id": "14e0a67e-9bad-4085-a79f-941cc1de8066",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "  notepad.gameOver = false;",
+                "  notepad.jibowin = false;",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    console.log('in while here');",
+                "    console.log(notepad.results.game);",
+                "    console.log('in while here under results.game');",
+                "    console.log(notepad);",
+                "    return !notepad.gameOver;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "f0dbf354-59d3-4271-bca3-27ef79cdf2ff": {
+        "id": "f0dbf354-59d3-4271-bca3-27ef79cdf2ff",
+        "class": "Sequence",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "5e513def-fbd4-4af0-9ba6-bbe9f98a2079",
+        "decorators": [
+            "85a04474-c7c0-43ac-9a3f-e9df4db9fe50"
+        ],
+        "children": [
+            "5bdd2806-a1e5-4207-b773-8e253158e281"
+        ]
+    },
+    "85a04474-c7c0-43ac-9a3f-e9df4db9fe50": {
+        "id": "85a04474-c7c0-43ac-9a3f-e9df4db9fe50",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.turns < 5 && notepad.gameOver==true){",
+                "    notepad.gameOver = true;",
+                "    notepad.jiboWin = true;",
+                "    console.log('jibo win?');",
+                "    console.log(notepad.jiboWin);",
+                "    console.log(notepad.turns);",
+                "    return true;",
+                "  }",
+                "  return false",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "2f7a4960-35fa-423d-8b27-b76e71eb92ec": {
+        "id": "2f7a4960-35fa-423d-8b27-b76e71eb92ec",
+        "class": "Sequence",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "5e513def-fbd4-4af0-9ba6-bbe9f98a2079",
+        "children": [
+            "92834307-c0c5-4784-9e40-0ca376aea362"
+        ],
+        "decorators": [
+            "074fcc8f-83f9-42a9-8dae-61a2ad3b9e7c"
+        ]
+    },
+    "074fcc8f-83f9-42a9-8dae-61a2ad3b9e7c": {
+        "id": "074fcc8f-83f9-42a9-8dae-61a2ad3b9e7c",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  return notepad.turns < 5? true: false;",
+                "",
                 "}"
             ]
         },
