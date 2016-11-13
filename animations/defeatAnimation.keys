@@ -43,19 +43,6 @@
                 {
                     "value": {
                         "Head": 0,
-                        "Torso": 180.9999999999999,
-                        "Pelvis": 178.49999999999997,
-                        "Tween": {
-                            "display": "sine in out",
-                            "label": "Sine Ease In Out",
-                            "value": "sineInOut"
-                        }
-                    },
-                    "time": 20
-                },
-                {
-                    "value": {
-                        "Head": 0,
                         "Torso": 181,
                         "Pelvis": 178.49999999999997,
                         "Tween": {

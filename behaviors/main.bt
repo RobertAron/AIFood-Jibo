@@ -255,6 +255,7 @@
                 "          }",
                 "          else{",
                 "\t           console.log(JSON.parse(body).score);",
+                "             console.log(body.type);",
                 "             body = JSON.parse(body);",
                 "            // 1 = rock",
                 "            // 2 = paper",
@@ -542,8 +543,10 @@
         "options": {
             "conditional": [
                 "() => {",
+                "  console.log('jibochoice ' + notepad.jibochoice);",
+                "  ",
                 "  console.log(notepad.rspresponse);",
-                "  return notepad.winner == 'jibo';",
+                "  return !(notepad.winner == 'jibo');",
                 "}"
             ]
         },
@@ -832,7 +835,6 @@
             ],
             "conditional": [
                 "() => {",
-                "  console.log(notepad.rspresponse);",
                 "  return false;",
                 "    return !notepad.rspresponse",
                 "}"
@@ -852,7 +854,6 @@
             ],
             "conditional": [
                 "() => {",
-                "  console.log('inside playanimation' +notepad.rspresponse);",
                 "  return !notepad.rspresponse;",
                 "}"
             ]
