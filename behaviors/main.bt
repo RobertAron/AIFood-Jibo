@@ -157,9 +157,8 @@
             "words": "Okay Lets play!",
             "onWord": [
                 "(word) => {",
-                "  console.log('logging word');",
-                "  console.log(word);",
-                "  console.log('finish log');",
+                "  ",
+                "  notepad.rspresponse = false;",
                 "  notepad.jibochoice=\"\";",
                 "}"
             ]
@@ -182,7 +181,6 @@
                 "  if (entity) {",
                 "          position = {x: entity.position.x, y: entity.position.y, z: entity.position.z};",
                 "  }",
-                "",
                 "  return position;",
                 "}"
             ],
@@ -218,15 +216,13 @@
                 "  ",
                 "  // put the photo's URL on the notepad",
                 "  notepad.imageUrl = imageUrl;",
-                "  notepad.rspresponse = false;",
                 "",
                 "  var xhr = new XMLHttpRequest();",
                 "  xhr.responseType = 'blob';",
                 "  xhr.onload = function() {",
                 "    var reader = new FileReader();",
                 "    reader.onloadend = function() {",
-                "      var image = reader.result.substring(22);",
-                "      ",
+                "      var image = reader.result.substring(22);      ",
                 "      var options ={",
                 "        url : \"https://api.imgur.com/3/image\",",
                 "        headers :{",
@@ -242,9 +238,7 @@
                 "        if (!error && response.statusCode == 200) {",
                 "          var resp = response.body;",
                 "          var a =  JSON.parse(resp);",
-                "          console.log('imgur id');",
-                "          console.log(a.data.id);",
-                "          ",
+                "",
                 "          options = {};",
                 "          options = {",
                 "            url: 'https://peaceful-cliffs-35229.herokuapp.com/compare?img=http://i.imgur.com/'",
@@ -260,10 +254,8 @@
                 "              //guess",
                 "          }",
                 "          else{",
-                "            console.log(body);",
-                "\t           console.log(JSON.parse(body).type);",
+                "\t           console.log(JSON.parse(body).score);",
                 "             body = JSON.parse(body);",
-                "             console.log(notepad.jibochoice);",
                 "            // 1 = rock",
                 "            // 2 = paper",
                 "            // 3 = scissor",
@@ -295,8 +287,6 @@
                 "          else   if(notepad.jibochoice == 3 && body.type==3){",
                 "              notepad.winner = 'tie'",
                 "            }",
-                "            console.log('winner:')",
-                "            console.log(notepad.winner);",
                 "            notepad.rspresponse = true;",
                 "            ",
                 "          }",
@@ -412,7 +402,6 @@
                 "  if (entity) {",
                 "          position = {x: entity.position.x, y: entity.position.y, z: entity.position.z};",
                 "  }",
-                "",
                 "  return position;",
                 "}"
             ],
@@ -513,7 +502,9 @@
         },
         "asset-pack": "core",
         "parent": "fbbd8706-f601-4507-a801-d710de760e7f",
-        "decorators": []
+        "decorators": [
+            "ea360c50-674e-4d8e-9185-4aa279919cb1"
+        ]
     },
     "96d32b4a-b750-4042-a6ae-7840f4cd9077": {
         "id": "96d32b4a-b750-4042-a6ae-7840f4cd9077",
@@ -530,7 +521,7 @@
     "e058041a-037a-4abc-80da-cd61d89e9940": {
         "id": "e058041a-037a-4abc-80da-cd61d89e9940",
         "class": "PlayAnimation",
-        "name": "",
+        "name": "jibo win",
         "options": {
             "animPath": "victoryDance.keys",
             "config": [
@@ -551,7 +542,8 @@
         "options": {
             "conditional": [
                 "() => {",
-                "  return notepad.jibowin;",
+                "  console.log(notepad.rspresponse);",
+                "  return notepad.winner == 'jibo';",
                 "}"
             ]
         },
@@ -564,7 +556,7 @@
         "options": {
             "conditional": [
                 "() => {",
-                "  return !notepad.jibowin;",
+                "  return true;",
                 "}"
             ]
         },
@@ -573,7 +565,7 @@
     "109186e6-6528-4d4b-bb91-a46214c6031d": {
         "id": "109186e6-6528-4d4b-bb91-a46214c6031d",
         "class": "PlayAnimation",
-        "name": "",
+        "name": "jibo lose",
         "options": {
             "animPath": "defeatAnimation.keys",
             "config": [
@@ -835,13 +827,33 @@
         "options": {
             "init": [
                 "() => {",
-                "  return !notepad.rspresponse;",
+                "    return ",
                 "}"
             ],
             "conditional": [
                 "() => {",
+                "  console.log(notepad.rspresponse);",
                 "  return false;",
                 "    return !notepad.rspresponse",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "ea360c50-674e-4d8e-9185-4aa279919cb1": {
+        "id": "ea360c50-674e-4d8e-9185-4aa279919cb1",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "  console.log('inside playanimation' +notepad.rspresponse);",
+                "  return !notepad.rspresponse;",
                 "}"
             ]
         },
