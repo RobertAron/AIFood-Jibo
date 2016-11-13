@@ -108,10 +108,14 @@
         "asset-pack": "core",
         "parent": 1,
         "children": [
-            "0c9b15a2-acfd-440b-be62-74651f040c62",
             "114e7e21-2873-4574-9a0e-5ef2a67ccbdf",
+            "0c9b15a2-acfd-440b-be62-74651f040c62",
+            "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
             "354d4bfb-78af-40c7-a26b-b56a9cec9b87",
             "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99"
+        ],
+        "decorators": [
+            "bfb9e5ba-00c5-426d-b67e-e68378b13e4b"
         ]
     },
     "38764d97-9e39-4bf2-a873-34df84d63c0e": {
@@ -129,7 +133,7 @@
                 "    return options;",
                 "}"
             ],
-            "rule": "reservations.rule",
+            "rule": "helloworld.rule",
             "onResult": [
                 "(listener) => {",
                 "    listener.on('hey-jibo', (asrResult, speakerIds) => {",
@@ -150,7 +154,7 @@
         "class": "TextToSpeech",
         "name": "",
         "options": {
-            "words": "Say cheese!",
+            "words": "Okay Lets play!",
             "onWord": [
                 "(word) => {",
                 "}"
@@ -310,6 +314,98 @@
             "eventName": "listen",
             "onEvent": [
                 "() => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "e78e00bb-74ac-4734-bfbd-717efb4eca0c": {
+        "id": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
+        "class": "Sequence",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+        "decorators": [
+            "4793beff-845e-4f39-8884-77e3d4a1b1c1"
+        ],
+        "children": [
+            "86d11084-765b-430c-85bd-61db36342396",
+            "c5e35c3c-419f-4dd9-911d-dc14c534354b",
+            "b884c16a-d65f-4f8c-942d-b1dd00b16a11"
+        ]
+    },
+    "4793beff-845e-4f39-8884-77e3d4a1b1c1": {
+        "id": "4793beff-845e-4f39-8884-77e3d4a1b1c1",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return true;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "b884c16a-d65f-4f8c-942d-b1dd00b16a11": {
+        "id": "b884c16a-d65f-4f8c-942d-b1dd00b16a11",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "headBob.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
+    },
+    "c5e35c3c-419f-4dd9-911d-dc14c534354b": {
+        "id": "c5e35c3c-419f-4dd9-911d-dc14c534354b",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "headBob.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
+    },
+    "86d11084-765b-430c-85bd-61db36342396": {
+        "id": "86d11084-765b-430c-85bd-61db36342396",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "headBob.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
+    },
+    "bfb9e5ba-00c5-426d-b67e-e68378b13e4b": {
+        "id": "bfb9e5ba-00c5-426d-b67e-e68378b13e4b",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return (notepad.results.game==='rock');",
                 "}"
             ]
         },

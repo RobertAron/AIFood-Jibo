@@ -1,0 +1,32 @@
+{
+    "version": "0.6.0",
+    "framerate": 30,
+    "duration": 30,
+    "scale": 1,
+    "layers": [
+        {
+            "id": "8eac7896403a4dada99ce7db92cf5aaa",
+            "name": "Eye",
+            "type": "Eye",
+            "visible": true,
+            "locked": false,
+            "keyframes": []
+        },
+        {
+            "id": "dfd1c2b18c9d4e8aab638ca398a48303",
+            "name": "Eye Texture",
+            "type": "Eye Texture",
+            "visible": true,
+            "locked": false,
+            "keyframes": []
+        },
+        {
+            "id": "bc14d83fc707451f8ad3d3a813ecab46",
+            "name": "Body",
+            "type": "Body",
+            "visible": true,
+            "locked": false,
+            "keyframes": []
+        }
+    ]
+}
