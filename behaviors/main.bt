@@ -68,7 +68,6 @@
             "behaviorPath": "idle.bt",
             "getNotepad": [
                 "() => {",
-                "  console.log(\"here\")",
                 "    return {};",
                 "}"
             ],
