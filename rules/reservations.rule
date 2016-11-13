@@ -1,1 +1,1 @@
-TopRule = $* (I want more of this){food = "true"} $*;
+TopRule = $* (I want more of this){food = 'true'} $*;
