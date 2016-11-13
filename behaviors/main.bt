@@ -7,7 +7,8 @@
         "asset-pack": "core",
         "children": [
             "c4ba0aaa-b165-47f0-adc6-34640b6afe64",
-            "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
+            "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
+            "4752f23f-9d64-447c-a1e1-2e980ada314d"
         ],
         "decorators": [
             "ef5452e0-0f94-47f5-8d39-b2d396885818"
@@ -90,6 +91,7 @@
             "exec": [
                 "(succeed, fail) => {",
                 "    let dofs = jibo.animate.dofs;",
+                "    ",
                 "    jibo.animate.centerRobot(dofs.ALL, true, () => {",
                 "        jibo.animate.setLEDColor([0, 0, 1]);",
                 "        succeed();    ",
@@ -103,7 +105,7 @@
     "e4c3a1b7-ca52-43a7-be7c-50acad7099f4": {
         "id": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
         "class": "Sequence",
-        "name": "",
+        "name": "rock paper scissors",
         "options": {},
         "asset-pack": "core",
         "parent": 1,
@@ -112,7 +114,9 @@
             "0c9b15a2-acfd-440b-be62-74651f040c62",
             "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
         ],
-        "decorators": []
+        "decorators": [
+            "68142f03-541c-4423-b691-422e326e9cd7"
+        ]
     },
     "38764d97-9e39-4bf2-a873-34df84d63c0e": {
         "id": "38764d97-9e39-4bf2-a873-34df84d63c0e",
@@ -239,6 +243,7 @@
                 "          var a =  JSON.parse(resp);",
                 "          console.log('imgur id');",
                 "          console.log(a.data.id);",
+                "          ",
                 "        }else{",
                 "        }",
                 "      })",
@@ -598,5 +603,50 @@
         "decorators": [
             "70cea2aa-f586-4ce1-a360-a167ee57344b"
         ]
+    },
+    "68142f03-541c-4423-b691-422e326e9cd7": {
+        "id": "68142f03-541c-4423-b691-422e326e9cd7",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.results === 'GOT-PARSE'){",
+                "    return notepad.results.game === 'rock' ? true: false;",
+                "  }else{",
+                "    return false;",
+                "  }",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "4752f23f-9d64-447c-a1e1-2e980ada314d": {
+        "id": "4752f23f-9d64-447c-a1e1-2e980ada314d",
+        "class": "Sequence",
+        "name": "high low game",
+        "options": {},
+        "asset-pack": "core",
+        "parent": 1,
+        "decorators": [
+            "507e44e1-c33f-48c8-8704-6a306e755f03"
+        ]
+    },
+    "507e44e1-c33f-48c8-8704-6a306e755f03": {
+        "id": "507e44e1-c33f-48c8-8704-6a306e755f03",
+        "class": "Case",
+        "name": "",
+        "options": {
+            "conditional": [
+                "() => {",
+                "  if(notepad.results === 'GOT-PARSE'){",
+                "    return notepad.results.game === 'high-low' ? true: false;",
+                "  }else{",
+                "    return false;",
+                "  }",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
     }
 }
