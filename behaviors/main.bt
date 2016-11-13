@@ -110,9 +110,7 @@
         "children": [
             "114e7e21-2873-4574-9a0e-5ef2a67ccbdf",
             "0c9b15a2-acfd-440b-be62-74651f040c62",
-            "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
-            "354d4bfb-78af-40c7-a26b-b56a9cec9b87",
-            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99"
+            "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
         ],
         "decorators": []
     },
@@ -204,34 +202,6 @@
         },
         "asset-pack": "core"
     },
-    "354d4bfb-78af-40c7-a26b-b56a9cec9b87": {
-        "id": "354d4bfb-78af-40c7-a26b-b56a9cec9b87",
-        "class": "Parallel",
-        "name": "",
-        "options": {
-            "succeedOnOne": false
-        },
-        "asset-pack": "core",
-        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4",
-        "children": [
-            "d9c0a925-ddf8-4635-b44f-ea0b26707e4c",
-            "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5"
-        ]
-    },
-    "d9c0a925-ddf8-4635-b44f-ea0b26707e4c": {
-        "id": "d9c0a925-ddf8-4635-b44f-ea0b26707e4c",
-        "class": "PlayAnimation",
-        "name": "",
-        "options": {
-            "animPath": "camera.keys",
-            "config": [
-                "(animation) => {",
-                "}"
-            ]
-        },
-        "asset-pack": "core",
-        "parent": "354d4bfb-78af-40c7-a26b-b56a9cec9b87"
-    },
     "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5": {
         "id": "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5",
         "class": "TakePhoto",
@@ -292,7 +262,7 @@
             "noDistortion": true
         },
         "asset-pack": "core",
-        "parent": "354d4bfb-78af-40c7-a26b-b56a9cec9b87"
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
     },
     "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99": {
         "id": "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
@@ -305,7 +275,7 @@
             ]
         },
         "asset-pack": "core",
-        "parent": "e4c3a1b7-ca52-43a7-be7c-50acad7099f4"
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
     },
     "d989ec4c-d6ae-4c52-bc59-ec3b520ce263": {
         "id": "d989ec4c-d6ae-4c52-bc59-ec3b520ce263",
@@ -331,7 +301,10 @@
         "children": [
             "86d11084-765b-430c-85bd-61db36342396",
             "c5e35c3c-419f-4dd9-911d-dc14c534354b",
-            "b884c16a-d65f-4f8c-942d-b1dd00b16a11"
+            "b884c16a-d65f-4f8c-942d-b1dd00b16a11",
+            "a57cd1a4-e2ee-43d6-893e-65c6aa447140",
+            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
+            "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5"
         ]
     },
     "b884c16a-d65f-4f8c-942d-b1dd00b16a11": {
@@ -375,5 +348,45 @@
         },
         "asset-pack": "core",
         "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
+    },
+    "0a08b0a5-740d-44e1-8a7f-99135e2222f2": {
+        "id": "0a08b0a5-740d-44e1-8a7f-99135e2222f2",
+        "class": "TimeoutSucceed",
+        "name": "",
+        "options": {
+            "timeout": 8000
+        },
+        "asset-pack": "core"
+    },
+    "a57cd1a4-e2ee-43d6-893e-65c6aa447140": {
+        "id": "a57cd1a4-e2ee-43d6-893e-65c6aa447140",
+        "class": "LookAt",
+        "name": "",
+        "options": {
+            "getTarget": [
+                "() => {",
+                "  let jibo = require('jibo');",
+                "  let entity = jibo.lps.getClosestVisualEntity();",
+                "  ",
+                "  let position = {x:.5, y:.1, z:.4};",
+                "",
+                "  if (entity) {",
+                "          position = {x: entity.position.x, y: entity.position.y, z: entity.position.z};",
+                "  }",
+                "",
+                "  return position;",
+                "}"
+            ],
+            "isContinuous": false,
+            "config": [
+                "(lookAt) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
+        "decorators": [
+            "0a08b0a5-740d-44e1-8a7f-99135e2222f2"
+        ]
     }
 }
