@@ -213,15 +213,13 @@
                 "  ",
                 "  // put the photo's URL on the notepad",
                 "  notepad.imageUrl = imageUrl;",
-                "  console.log(notepad.imageUrl)",
+                "  ",
                 "",
                 "  var xhr = new XMLHttpRequest();",
                 "  xhr.responseType = 'blob';",
                 "  xhr.onload = function() {",
                 "    var reader = new FileReader();",
                 "    reader.onloadend = function() {",
-                "      console.log(\"debug\");",
-                "      console.log(reader.result);",
                 "      var image = reader.result.substring(22);",
                 "      ",
                 "      var options ={",
@@ -237,16 +235,11 @@
                 "      var request = require('request');",
                 "      request.post(options, function (error, response, body) {",
                 "        if (!error && response.statusCode == 200) {",
-                "          console.log(response);",
-                "          console.log(response.body);",
                 "          var resp = response.body;",
                 "          var a =  JSON.parse(resp);",
+                "          console.log('imgur id');",
                 "          console.log(a.data.id);",
                 "        }else{",
-                "          console.log(\"error\");",
-                "          console.log(response);",
-                "          ",
-                "          console.log(error);",
                 "        }",
                 "      })",
                 "      ",
@@ -267,15 +260,28 @@
     "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99": {
         "id": "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
         "class": "ExecuteScript",
-        "name": "",
+        "name": "loop until response",
         "options": {
             "exec": [
                 "() => {",
+                "  var request = require('request');",
+                "  var url = ''; //NHAT URL ",
+                "  request(url, function (error, response, body) {",
+                "    if (!error && response.statusCode == 200) {",
+                "      // success response",
+                "      notepad.rspresponse = true;",
+                "      // do game logic",
+                "      notepad.jibowin = false;",
+                "    }",
+                "  })",
                 "}"
             ]
         },
         "asset-pack": "core",
-        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
+        "parent": "fbbd8706-f601-4507-a801-d710de760e7f",
+        "decorators": [
+            "5279043c-f836-4e02-b210-0efccdb93ed0"
+        ]
     },
     "d989ec4c-d6ae-4c52-bc59-ec3b520ce263": {
         "id": "d989ec4c-d6ae-4c52-bc59-ec3b520ce263",
@@ -302,9 +308,10 @@
             "86d11084-765b-430c-85bd-61db36342396",
             "c5e35c3c-419f-4dd9-911d-dc14c534354b",
             "b884c16a-d65f-4f8c-942d-b1dd00b16a11",
+            "d4704944-cb4a-4cfa-815a-be0f210a2b71",
             "a57cd1a4-e2ee-43d6-893e-65c6aa447140",
-            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
-            "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5"
+            "6ace06e3-c762-42fe-bc1b-ae1e38c6d7a5",
+            "fbbd8706-f601-4507-a801-d710de760e7f"
         ]
     },
     "b884c16a-d65f-4f8c-942d-b1dd00b16a11": {
@@ -388,5 +395,129 @@
         "decorators": [
             "0a08b0a5-740d-44e1-8a7f-99135e2222f2"
         ]
+    },
+    "d4704944-cb4a-4cfa-815a-be0f210a2b71": {
+        "id": "d4704944-cb4a-4cfa-815a-be0f210a2b71",
+        "class": "Random",
+        "name": "",
+        "options": {},
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
+        "children": [
+            "17197784-f47a-4721-8721-a6b1ec410efc",
+            "c41d88f0-6140-41f1-8537-bab3135d14bb",
+            "9cb0f7ed-e104-4e91-811e-8672db3edd78"
+        ]
+    },
+    "9cb0f7ed-e104-4e91-811e-8672db3edd78": {
+        "id": "9cb0f7ed-e104-4e91-811e-8672db3edd78",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "paper.keys",
+            "config": [
+                "(animation) => {",
+                "  notepad.jibochoice = 'paper';",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "d4704944-cb4a-4cfa-815a-be0f210a2b71"
+    },
+    "c41d88f0-6140-41f1-8537-bab3135d14bb": {
+        "id": "c41d88f0-6140-41f1-8537-bab3135d14bb",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "scissors.keys",
+            "config": [
+                "(animation) => {",
+                "  notepad.jibochoice = 'scissors';",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "d4704944-cb4a-4cfa-815a-be0f210a2b71"
+    },
+    "17197784-f47a-4721-8721-a6b1ec410efc": {
+        "id": "17197784-f47a-4721-8721-a6b1ec410efc",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "rock.keys",
+            "config": [
+                "(animation) => {",
+                "  notepad.jibochoice = 'rock';",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "d4704944-cb4a-4cfa-815a-be0f210a2b71"
+    },
+    "5279043c-f836-4e02-b210-0efccdb93ed0": {
+        "id": "5279043c-f836-4e02-b210-0efccdb93ed0",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return !notepad.rpsresponse;",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
+    },
+    "fbbd8706-f601-4507-a801-d710de760e7f": {
+        "id": "fbbd8706-f601-4507-a801-d710de760e7f",
+        "class": "Parallel",
+        "name": "",
+        "options": {
+            "succeedOnOne": false
+        },
+        "asset-pack": "core",
+        "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
+        "children": [
+            "64c7afb8-b813-4191-ae31-1e5b3d485b6c",
+            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99"
+        ]
+    },
+    "64c7afb8-b813-4191-ae31-1e5b3d485b6c": {
+        "id": "64c7afb8-b813-4191-ae31-1e5b3d485b6c",
+        "class": "PlayAnimation",
+        "name": "",
+        "options": {
+            "animPath": "loading.keys",
+            "config": [
+                "(animation) => {",
+                "}"
+            ]
+        },
+        "asset-pack": "core",
+        "parent": "fbbd8706-f601-4507-a801-d710de760e7f",
+        "decorators": [
+            "d85e9951-b3d4-470b-9fec-c3ac49ceb081"
+        ]
+    },
+    "d85e9951-b3d4-470b-9fec-c3ac49ceb081": {
+        "id": "d85e9951-b3d4-470b-9fec-c3ac49ceb081",
+        "class": "WhileCondition",
+        "name": "",
+        "options": {
+            "init": [
+                "() => {",
+                "  notepad.rspresponse = false;",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "    return !notepad.rspresponse",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
     }
 }
