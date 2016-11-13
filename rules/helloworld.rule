@@ -1,4 +1,3 @@
 TopRule =  (
-    reserve me a
-    flight {book='air'} | hotel {book='lodging'}
+    lets play rock paper scissors {game='rock'}
 );
