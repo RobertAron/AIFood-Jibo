@@ -1,3 +1,7 @@
 TopRule =  (
-    lets play rock paper scissors {game='rock'}
+    $rps{game='rock'}|$tq{game='twenty'}
 );
+
+
+rps=lets play rock paper scissors;
+tq= lets play twenty questions;
