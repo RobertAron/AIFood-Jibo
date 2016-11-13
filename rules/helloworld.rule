@@ -1,8 +1,7 @@
-TopRule =  (
+TopRule =  $*(
     $rps{game='rock'}|$tq{game='twenty'}
 );
 
 
-rps=lets play rock paper scissors;
+rps=let\'s play rock paper scissors;
 tq= lets play twenty questions;
-        
