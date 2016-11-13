@@ -160,6 +160,7 @@
                 "  console.log('logging word');",
                 "  console.log(word);",
                 "  console.log('finish log');",
+                "  notepad.jibochoice=\"\";",
                 "}"
             ]
         },
@@ -217,7 +218,7 @@
                 "  ",
                 "  // put the photo's URL on the notepad",
                 "  notepad.imageUrl = imageUrl;",
-                "  ",
+                "  notepad.rspresponse = false;",
                 "",
                 "  var xhr = new XMLHttpRequest();",
                 "  xhr.responseType = 'blob';",
@@ -244,12 +245,63 @@
                 "          console.log('imgur id');",
                 "          console.log(a.data.id);",
                 "          ",
+                "          options = {};",
+                "          options = {",
+                "            url: 'https://peaceful-cliffs-35229.herokuapp.com/compare?img=http://i.imgur.com/'",
+                "          }",
                 "        }else{",
                 "        }",
-                "      })",
-                "      ",
-                "      ",
-                "      ",
+                "        ",
+                "        options.url += a.data.id+\".jpg\";",
+                "        ",
+                "        request(options, function(error,response,body){",
+                "          if(error != null){",
+                "            console.log('error',error);",
+                "              //guess",
+                "          }",
+                "          else{",
+                "            console.log(body);",
+                "\t           console.log(JSON.parse(body).type);",
+                "             body = JSON.parse(body);",
+                "             console.log(notepad.jibochoice);",
+                "            // 1 = rock",
+                "            // 2 = paper",
+                "            // 3 = scissor",
+                "            ",
+                "            if(notepad.jibochoice == 1 && body.type==1){",
+                "              notepad.winner = 'tie'",
+                "            }",
+                "            else if(notepad.jibochoice == 1 && body.type==2){",
+                "              notepad.winner = 'player'",
+                "            }",
+                "            else if(notepad.jibochoice == 1 && body.type==3){",
+                "              notepad.winner = 'jibo'",
+                "            }",
+                "            else if(notepad.jibochoice == 2 && body.type==1){",
+                "              notepad.winner = 'jibo';",
+                "            }",
+                "          else   if(notepad.jibochoice == 2 && body.type==2){",
+                "              notepad.winner = 'tie'",
+                "            }",
+                "          else   if(notepad.jibochoice == 2 && body.type==3){",
+                "              notepad.winner = 'player';",
+                "            }",
+                "          else   if(notepad.jibochoice == 3 && body.type==1){",
+                "              notepad.winner = 'jibo'",
+                "            }",
+                "          else   if(notepad.jibochoice == 3 && body.type==2){",
+                "              notepad.winner = 'player';",
+                "            }",
+                "          else   if(notepad.jibochoice == 3 && body.type==3){",
+                "              notepad.winner = 'tie'",
+                "            }",
+                "            console.log('winner:')",
+                "            console.log(notepad.winner);",
+                "            notepad.rspresponse = true;",
+                "            ",
+                "          }",
+                "        });",
+                "      })      ",
                 "    }",
                 "    reader.readAsDataURL(xhr.response);",
                 "  };",
@@ -261,35 +313,6 @@
         },
         "asset-pack": "core",
         "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c"
-    },
-    "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99": {
-        "id": "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99",
-        "class": "ExecuteScript",
-        "name": "loop until response",
-        "options": {
-            "exec": [
-                "() => {",
-                "  var request = require('request');",
-                "  var url = ''; //NHAT URL ",
-                "  ",
-                "  notepad.jibowin = true;",
-                "  notepad.rspresponse = true;",
-                "  // request(url, function (error, response, body) {",
-                "  //   if (!error && response.statusCode == 200) {",
-                "  //     // success response",
-                "  //     notepad.rspresponse = true;",
-                "  //     // do game logic",
-                "  //     notepad.jibowin = false;",
-                "  //   }",
-                "  // })",
-                "}"
-            ]
-        },
-        "asset-pack": "core",
-        "parent": "fbbd8706-f601-4507-a801-d710de760e7f",
-        "decorators": [
-            "5279043c-f836-4e02-b210-0efccdb93ed0"
-        ]
     },
     "d989ec4c-d6ae-4c52-bc59-ec3b520ce263": {
         "id": "d989ec4c-d6ae-4c52-bc59-ec3b520ce263",
@@ -426,7 +449,7 @@
             "animPath": "paper.keys",
             "config": [
                 "(animation) => {",
-                "  notepad.jibochoice = 'paper';",
+                "  notepad.jibochoice = 3;",
                 "}"
             ]
         },
@@ -441,7 +464,7 @@
             "animPath": "scissors.keys",
             "config": [
                 "(animation) => {",
-                "  notepad.jibochoice = 'scissors';",
+                "  notepad.jibochoice = 2;",
                 "}"
             ]
         },
@@ -456,43 +479,25 @@
             "animPath": "rock.keys",
             "config": [
                 "(animation) => {",
-                "  notepad.jibochoice = 'rock';",
+                "  notepad.jibochoice = 1;",
                 "}"
             ]
         },
         "asset-pack": "core",
         "parent": "d4704944-cb4a-4cfa-815a-be0f210a2b71"
     },
-    "5279043c-f836-4e02-b210-0efccdb93ed0": {
-        "id": "5279043c-f836-4e02-b210-0efccdb93ed0",
-        "class": "WhileCondition",
-        "name": "",
-        "options": {
-            "init": [
-                "() => {",
-                "}"
-            ],
-            "conditional": [
-                "() => {",
-                "    return false;",
-                "    return !notepad.rpsresponse;",
-                "}"
-            ]
-        },
-        "asset-pack": "core"
-    },
     "fbbd8706-f601-4507-a801-d710de760e7f": {
         "id": "fbbd8706-f601-4507-a801-d710de760e7f",
-        "class": "Parallel",
+        "class": "Sequence",
         "name": "",
-        "options": {
-            "succeedOnOne": false
-        },
+        "options": {},
         "asset-pack": "core",
         "parent": "e78e00bb-74ac-4734-bfbd-717efb4eca0c",
         "children": [
-            "64c7afb8-b813-4191-ae31-1e5b3d485b6c",
-            "8eac0fea-20a0-4be2-b3a2-82bbe4ae0c99"
+            "64c7afb8-b813-4191-ae31-1e5b3d485b6c"
+        ],
+        "decorators": [
+            "b4500844-91d9-4488-b0c1-dec00193f507"
         ]
     },
     "64c7afb8-b813-4191-ae31-1e5b3d485b6c": {
@@ -508,29 +513,7 @@
         },
         "asset-pack": "core",
         "parent": "fbbd8706-f601-4507-a801-d710de760e7f",
-        "decorators": [
-            "d85e9951-b3d4-470b-9fec-c3ac49ceb081"
-        ]
-    },
-    "d85e9951-b3d4-470b-9fec-c3ac49ceb081": {
-        "id": "d85e9951-b3d4-470b-9fec-c3ac49ceb081",
-        "class": "WhileCondition",
-        "name": "",
-        "options": {
-            "init": [
-                "() => {",
-                "  ",
-                "  notepad.rspresponse = false;",
-                "}"
-            ],
-            "conditional": [
-                "() => {",
-                "  return false;",
-                "    return !notepad.rspresponse",
-                "}"
-            ]
-        },
-        "asset-pack": "core"
+        "decorators": []
     },
     "96d32b4a-b750-4042-a6ae-7840f4cd9077": {
         "id": "96d32b4a-b750-4042-a6ae-7840f4cd9077",
@@ -845,5 +828,23 @@
         },
         "asset-pack": "core",
         "parent": "17fd7fa2-5ad3-4eb8-9d6b-d8421bc1c4e8"
+    },
+    "b4500844-91d9-4488-b0c1-dec00193f507": {
+        "id": "b4500844-91d9-4488-b0c1-dec00193f507",
+        "class": "WhileCondition",
+        "options": {
+            "init": [
+                "() => {",
+                "  return !notepad.rspresponse;",
+                "}"
+            ],
+            "conditional": [
+                "() => {",
+                "  return false;",
+                "    return !notepad.rspresponse",
+                "}"
+            ]
+        },
+        "asset-pack": "core"
     }
 }
